@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Automates check on smart data of devices in a host. It detects errors ins
+# past tests and the files those might affect.
 
 function get_devices() {
   lsblk -d -lo NAME -p | grep -v NAME | grep -v "/dev/sr"

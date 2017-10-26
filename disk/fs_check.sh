@@ -54,6 +54,7 @@ function check_disk_ok() {
   if [ ! -z "$failure_lba" ]
   then
     echo "Disk($1) contains block failures at LBA $failure_lba"
+    echo "Failure:disk:$1"
     broken_partition=( $( search_partition $1 $failure_lba ) )
     partition_name=${broken_partition[0]}
     partition_start=${broken_partition[1]}
@@ -65,7 +66,7 @@ function check_disk_ok() {
     then
       echo "Block is in use"
       broken_file=$(get_file $partition_name $broken_block)
-      echo "Failure: $partition_name $failure_lba $broken_block $broken_file"
+      echo "Failure:file:$partition_name:$failure_lba:$broken_block:$broken_file"
     else
       echo "Block not in use"
     fi

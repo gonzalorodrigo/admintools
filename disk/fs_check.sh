@@ -81,5 +81,4 @@ for disk_name in ${disks[@]}
 do
   echo "Testing disk $disk_name"
   check_disk_ok $disk_name
-  search_partition $disk_name 184131582
 done

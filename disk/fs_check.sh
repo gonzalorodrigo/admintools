@@ -4,7 +4,7 @@
 # past tests and the files those might affect.
 
 function get_devices() {
-  lsblk -d -lo NAME -p | grep -v NAME | grep -v "/dev/sr"
+  smartctl --scan | awk '{ print $1 }'
 }
 
 function list_failures_disk() {
@@ -79,9 +79,9 @@ function check_disk_ok() {
 
 
 disks=( $( get_devices  ) )
-echo "All disks detected ${disks[@]}"
+echo "All disks detected: ${disks[@]}"
 for disk_name in ${disks[@]}
 do
-  echo "Testing disk $disk_name"
+  echo "Testing disk: $disk_name"
   check_disk_ok $disk_name
 done
